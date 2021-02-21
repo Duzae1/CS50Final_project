@@ -33,6 +33,7 @@ def login():
 @app.route('/control', methods=['GET', 'POST'])
 def control():
     if request.method == 'POST':
+        
         return render_template ('control.html')
     else:
         flash('Login needed')

@@ -5,9 +5,13 @@
 {% block body %}
         <form action='/index' method='post'>
                 <input name='name' autocomplete='off' placeholder='Your name' type='text'><br>
-                <input name='delivery' type='radio' value='delivery'><label for='delivery'>Delivery</label><br>
-                <input name='adress' autocomplete='off' placeholder='Your adress' type='text'>
-                <input name='table' autoomplete='off' placeholder='Table number' type='numeric'><br>
+                <input name='email' autocomplete='off' placeholder='Your email' type='text'><br>
+                <input id='delivery' name='delivery' type='checkbox' value='delivery' on_click="display()"><label for='delivery'>Delivery</label><br>
+                <div>   
+                        <input id='address' name='address' autocomplete='off' placeholder='Your address' type='text' style='display: block;'>
+                        or
+                        <input id='table' name='table' autocomplete='off' placeholder='Table number' type='numeric' style='display: block;'>
+                </div>
                 <select name='combo'>
                         <option value='1'>Combo 1</option>
                         <option value='2'>Combo 2</option>
