@@ -1,13 +1,15 @@
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 import random
-import cs50
+from cs50 import SQL
 
 app = Flask(__name__)
 app.secret_key="dev"
+db = SQL('sqlite:///app.db')
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -26,6 +28,7 @@ def login():
         return redirect(url_for('control'))
     else:
         return render_template ('login.html')
+
 
 @app.route('/control', methods=['GET', 'POST'])
 def control():

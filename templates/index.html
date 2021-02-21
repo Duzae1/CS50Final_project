@@ -3,5 +3,16 @@
 {% block title %}SelfServe{% endblock %}
 
 {% block body %}
-        <h1>Hello, World!</h1>
+        <form action='/index' method='post'>
+                <input name='name' autocomplete='off' placeholder='Your name' type='text'><br>
+                <input name='delivery' type='radio' value='delivery'><label for='delivery'>Delivery</label><br>
+                <input name='adress' autocomplete='off' placeholder='Your adress' type='text'>
+                <input name='table' autoomplete='off' placeholder='Table number' type='numeric'><br>
+                <select name='combo'>
+                        <option value='1'>Combo 1</option>
+                        <option value='2'>Combo 2</option>
+                        <option value='3'>Combo 3</option>
+                        <option value='4'>Combo 4</option>
+                </select>
+        </form>
 {% endblock %}
