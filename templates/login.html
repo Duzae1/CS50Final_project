@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}SelfServeAdmin{% endblock %}
+
+{% block body %}
+        <form action="/control" method="post">
+                <input autocomplete="off" name="username" placeholder="Username" type="text">
+                <input autocomplete="off" name="password" placeholder="Password" type="text">
+                <button type="submit">Submit</button>
+        </form>
+{% endblock %}
