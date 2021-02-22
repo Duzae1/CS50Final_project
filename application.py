@@ -2,16 +2,20 @@ from flask import Flask, flash, redirect, render_template, request, session, url
 import random
 from cs50 import SQL
 
+# setup flask app and database
 app = Flask(__name__)
 app.secret_key="dev"
 db = SQL('sqlite:///app.db')
 
+# list off the diferent combos
 combos=[1, 2, 3, 4]
 
+# customers' page
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        # check for valid input
         if request.form.get('name') == '':
             flash('Please input your name')
             return redirect(url_for('index'))
@@ -19,17 +23,19 @@ def index():
             flash('Combo not available')
             return redirect(url_for('index'))
         
+        # retrieve form values
         name = request.form.get('name')
         email = request.form.get('email')
         combo = int(request.form.get('combo'))
-
         address = request.form.get('address')
         table = request.form.get('table')
 
-        if request.form.get('delivery') == True:
+        print(f'{name}, {email}, {combo}, {address}, {table}')
+
+        if request.form.get('delivery') == 'delivery':
             db.execute('INSERT INTO orders (name, email, combo, address) VALUES (?, ?, ?, ?)', name, email, combo, address)
         else:
-            db.execute('INSERT INTO orders (name, email, combo, table_n) VALUES (?, ?, ?, ?)', name, email, combo, address)
+            db.execute('INSERT INTO orders (name, email, combo, table_n) VALUES (?, ?, ?, ?)', name, email, combo, table)
 
         flash('Successful order!')
         return redirect(url_for('index'))    

@@ -14,7 +14,17 @@
             <th>Time of order</th>
         </thead>
         <tbody>
-            
+            {% for order in orders%}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.email }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.table_n }}</td>
+                    <td>{{ order.combo }}</td>
+                    <td>{{ order.time }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}
