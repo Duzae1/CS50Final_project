@@ -30,27 +30,35 @@ def index():
         address = request.form.get('address')
         table = request.form.get('table')
 
-        print(f'{name}, {email}, {combo}, {address}, {table}')
+        if address == '' and table == '':
+            flash('Please input your location')
+            return redirect(url_for('index'))
 
+        # if the customer wants a delivery, store their address. Otherwise, store their table
         if request.form.get('delivery') == 'delivery':
-            db.execute('INSERT INTO orders (name, email, combo, address) VALUES (?, ?, ?, ?)', name, email, combo, address)
+            db.execute('INSERT INTO orders (name, email, combo, delivery, location) VALUES (?, ?, ?, ?, ?)', name, email, combo, 'Yes', address)
         else:
-            db.execute('INSERT INTO orders (name, email, combo, table_n) VALUES (?, ?, ?, ?)', name, email, combo, table)
+            db.execute('INSERT INTO orders (name, email, combo, delivery, location) VALUES (?, ?, ?, ?, ?)', name, email, combo, 'No', table)
 
+        # Acknowledge order
         flash('Successful order!')
         return redirect(url_for('index'))    
     
     else:
+        # render the order form with the aforementioned combos
         return render_template('index.html', combos=combos)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # assign a username and create a different password each time someone tries to access the login form
+    # print the password to the command line
     username = 'admin'
     password = str(random.randrange(100000000))
     print(f"Pass: {password}")
 
     if request.method == 'POST':
+        # check for correct valid and correct input
         input_u = request.form.get("username")
         input_p = request.form.get("password")
 
@@ -60,12 +68,14 @@ def login():
 
         return redirect(url_for('control'))
     else:
+        # show login form
         return render_template ('login.html')
 
 
 @app.route('/control', methods=['GET', 'POST'])
 def control():
     if request.method == 'POST':
+        # return all orders
         orders = db.execute('SELECT * FROM orders')
         return render_template ('control.html', orders=orders)
     else:
