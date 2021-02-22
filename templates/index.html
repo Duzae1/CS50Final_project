@@ -4,19 +4,20 @@
 
 {% block body %}
         <form action='/index' method='post'>
-                <input name='name' autocomplete='off' placeholder='Your name' type='text'><br>
+                <input name='name' autocomplete='off' placeholder='Your name' type='text' autofocus><br>
                 <input name='email' autocomplete='off' placeholder='Your email' type='text'><br>
                 <input id='delivery' name='delivery' type='checkbox' value='delivery' on_click="display()"><label for='delivery'>Delivery</label><br>
                 <div>   
                         <input id='address' name='address' autocomplete='off' placeholder='Your address' type='text' style='display: block;'>
                         or
-                        <input id='table' name='table' autocomplete='off' placeholder='Table number' type='numeric' style='display: block;'>
+                        <input id='table' name='table' autocomplete='off' placeholder='Table number' type='number' max='10' style='display: block;'>
                 </div>
+                <label for='combo'>Combo</label>
                 <select name='combo'>
-                        <option value='1'>Combo 1</option>
-                        <option value='2'>Combo 2</option>
-                        <option value='3'>Combo 3</option>
-                        <option value='4'>Combo 4</option>
+                        {% for combo in combos%}
+                        <option value='{{ combo }}'>{{ combo }}</option>
+                        {% endfor %}
                 </select>
+                <button type='submit'>Submit order</button>
         </form>
 {% endblock %}
