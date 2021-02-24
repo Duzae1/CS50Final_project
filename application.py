@@ -27,19 +27,21 @@ def index():
         name = request.form.get('name')
         email = request.form.get('email')
         combo = int(request.form.get('combo'))
-        address = request.form.get('address')
-        table = request.form.get('table')
+        table = 'Table: ' + request.form.get('table')
+        address = 'Address: ' + request.form.get('address')
+        
 
-        if address == '' and table == '':
-            flash('Please input your location')
-            return redirect(url_for('index'))
-
-        # if the customer wants a delivery, store their address. Otherwise, store their table
-        if request.form.get('delivery') == 'delivery':
-            db.execute('INSERT INTO orders (name, email, combo, delivery, location) VALUES (?, ?, ?, ?, ?)', name, email, combo, 'Yes', address)
+        radios = request.form.getlist('location')
+        if 'pick_up' in radios:
+            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, 'Picks it up', combo)
+        elif 'on_place' in radios:
+            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, table, combo)
+        elif 'delivery' in radios:
+            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, address, combo)
         else:
-            db.execute('INSERT INTO orders (name, email, combo, delivery, location) VALUES (?, ?, ?, ?, ?)', name, email, combo, 'No', table)
-
+            flash('Invalid order')
+            return redirect(url_for('index'))
+       
         # Acknowledge order
         flash('Successful order!')
         return redirect(url_for('index'))    
@@ -54,8 +56,7 @@ def login():
     # assign a username and create a different password each time someone tries to access the login form
     # print the password to the command line
     username = 'admin'
-    password = str(random.randrange(100000000))
-    print(f"Pass: {password}")
+    password = '1234'
 
     if request.method == 'POST':
         # check for correct valid and correct input

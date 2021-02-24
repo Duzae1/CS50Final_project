@@ -3,13 +3,12 @@
 {% block title %}SelfServeAdmin{% endblock %}
 
 {% block body %}
-    <table class='table table-bordered table-hover table-sm w-50'>
+<div class='container'>
+    <table class='table table-bordered table-hover table-sm'>
         <thead>
             <th>#</th>
             <th>Customer's name</th>
-            <th>Customer's email</th>
-            <th>Delivery ?</th>
-            <th>Customer's location</th>
+            <th>Food delivery</th>
             <th>Combo number</th>
             <th>Time of order</th>
         </thead>
@@ -18,15 +17,14 @@
                 <tr>
                     <td>{{ order.id }}</td>
                     <td>{{ order.name }}</td>
-                    <td>{{ order.email }}</td>
-                    <td>{{ order.delivery }}</td>
                     <td>{{ order.location }}</td>
-                    <td>{{ order.combo }}</td>
+                    <td>{{ order.combos }}</td>
                     <td>{{ order.time }}</td>
-                    <td><button type='button' class='btn btn-success'>Done</button></td>
-                    <td><button type='button' class='btn btn-danger'>Dismiss</button></td>
+                    <td><button type='button'>&#x2705</button></td>
+                    <td><button type='button'>&#10060</button></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}

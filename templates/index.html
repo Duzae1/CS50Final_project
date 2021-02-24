@@ -6,11 +6,14 @@
         <form action='/index' method='post'>
                 <input name='name' autocomplete='off' placeholder='Your name' type='text' autofocus><br>
                 <input name='email' autocomplete='off' placeholder='Your email' type='text'><br>
-                <input id='delivery' name='delivery' type='checkbox' value='delivery' on_click="display()"><label for='delivery'>Delivery</label><br>
+                <div>
+                        <input class='radio_items' name='location' type='radio' value='pick_up' onclick="change_input(event)"><label for='delivery'>Pick up</label>
+                        <input class='radio_items' name='location' type='radio' value='on_place' onclick="change_input(event)"><label for='delivery'>Eat here</label>
+                        <input class='radio_items' name='location' type='radio' value='delivery' onclick="change_input(event)"><label for='delivery'>Delivery</label>
+                </div>
                 <div>   
-                        <input id='address' name='address' autocomplete='off' placeholder='Your address' type='text' style='display: block;'>
-                        or
-                        <input id='table' name='table' autocomplete='off' placeholder='Table number' type='number' max='10' style='display: block;'>
+                        <input id='address' class='hidden' name='address' autocomplete='off' placeholder='Your address' type='text'>
+                        <input id='table' class='hidden' name='table' autocomplete='off' placeholder='Table number' type='number' max='10'>
                 </div>
                 <label for='combo'>Combo</label>
                 <select name='combo'>
