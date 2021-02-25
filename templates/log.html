@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}SelfServeAdmin{% endblock %}
+
+{% block body %}
+<div class='container'>
+    <table class='table table-bordered table-hover table-sm'>
+        <thead>
+            <th>#</th>
+            <th>Customer's name</th>
+            <th>Food delivery</th>
+            <th>Combo number</th>
+            <th>Time of order</th>
+        </thead>
+        <tbody>
+            {% for order in orders%}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.location }}</td>
+                    <td>{{ order.combos }}</td>
+                    <td>{{ order.time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<form action='/control' method='post'>
+    <button type='submit'>Log</button>
+</form>
+{% endblock %}

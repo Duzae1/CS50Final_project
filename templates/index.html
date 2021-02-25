@@ -5,11 +5,11 @@
 {% block body %}
         <form action='/index' method='post'>
                 <input name='name' autocomplete='off' placeholder='Your name' type='text' autofocus><br>
-                <input name='email' autocomplete='off' placeholder='Your email' type='text'><br>
+                <input id='email' name='email' autocomplete='off' placeholder='Your email (Optional)' type='text'><br>
                 <div>
-                        <input class='radio_items' name='location' type='radio' value='pick_up' onclick="change_input(event)"><label for='delivery'>Pick up</label>
-                        <input class='radio_items' name='location' type='radio' value='on_place' onclick="change_input(event)"><label for='delivery'>Eat here</label>
-                        <input class='radio_items' name='location' type='radio' value='delivery' onclick="change_input(event)"><label for='delivery'>Delivery</label>
+                        <input class='radio_items' name='location' type='radio' value='pick_up' onclick="change_input(event);"><label for='delivery'>Pick up</label>
+                        <input class='radio_items' name='location' type='radio' value='on_place' onclick="change_input(event);"><label for='delivery'>Eat here</label>
+                        <input class='radio_items' name='location' type='radio' value='delivery' onclick="change_input(event);"><label for='delivery'>Delivery</label>
                 </div>
                 <div>   
                         <input id='address' class='hidden' name='address' autocomplete='off' placeholder='Your address' type='text'>

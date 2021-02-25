@@ -11,6 +11,8 @@
             <th>Food delivery</th>
             <th>Combo number</th>
             <th>Time of order</th>
+            <th>Send order</th>
+            <th>Delete</th>
         </thead>
         <tbody>
             {% for order in orders%}
@@ -20,11 +22,18 @@
                     <td>{{ order.location }}</td>
                     <td>{{ order.combos }}</td>
                     <td>{{ order.time }}</td>
-                    <td><button type='button'>&#x2705</button></td>
-                    <td><button type='button'>&#10060</button></td>
+                    <form action='/control' method='post'>
+                        <td><button name='save' value='save' type='submit'>&#x2705</button></td>
+                        <td><button name='delete' value='delete' type='submit'>&#10060</button></td>
+                        <input type='hidden' name='counter' value='{{ order.id }}'>
+                    </form>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+
+<form action='/log' method='post'>
+    <button type='submit'>Log</button>
+</form>
 {% endblock %}

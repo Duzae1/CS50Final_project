@@ -10,3 +10,12 @@ body {
     margin-right: 5px;
     margin-left: 10px;
 }
+
+.done {
+    display: none;
+}
+
+.select {
+    position: absolute;
+    right: 50px;
+}
