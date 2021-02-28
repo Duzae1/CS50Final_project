@@ -15,14 +15,13 @@
                         <input id='address' class='hidden' name='address' autocomplete='off' placeholder='Your address' type='text'>
                         <input id='table' class='hidden' name='table' autocomplete='off' placeholder='Table number' type='number' max='10'>
                 </div>
-                <div id='combos'>
-                        <label for='combo'>Combo</label>
-                        <select name='combo'>
-                                <option name='option' value=''>Select combo</option>
-                                {% for combo in combos%}
-                                <option name='option' value='{{ combo }}'>{{ combo }}</option>
-                                {% endfor %}
-                        </select><br>
+                <div>
+                        <button name='add' class='buttons' type='button' onclick='add_combo()'>Add Combo</button> 
+                </div>
+                <div id='order_div'>
+                        {% for combo in menu %}
+                                <input hidden name='menu' value='{{ combo }}'>
+                        {% endfor %}
                 </div>
                 <button class='buttons' type='submit'>Submit order</button>
         </form>

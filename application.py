@@ -1,7 +1,6 @@
 import random
 
 from flask import Flask, flash, redirect, render_template, request, url_for, session
-from flask_session import Session
 from flask_mail import Mail, Message
 from cs50 import SQL
 
@@ -17,10 +16,6 @@ app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USERNAME"] = 'selfservebot@gmail.com'
 mail = Mail(app)
-
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
 
 # list off the diferent combos
 menu = [1, 2, 3, 4]
@@ -69,7 +64,7 @@ def index():
     
     else:
         # render the order form with the aforementioned combos
-        return render_template('index.html', combos=menu)
+        return render_template('index.html', menu=menu)
 
 
 @app.route('/login', methods=['GET', 'POST'])
