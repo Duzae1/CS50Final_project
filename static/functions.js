@@ -21,7 +21,3 @@ function change_input(event) {
     }
     
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    $('[data-toggle="popover"]').popover()
-}, false);

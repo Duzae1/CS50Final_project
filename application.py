@@ -1,6 +1,7 @@
 import random
 
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for, session
+from flask_session import Session
 from flask_mail import Mail, Message
 from cs50 import SQL
 
@@ -17,8 +18,12 @@ app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USERNAME"] = 'selfservebot@gmail.com'
 mail = Mail(app)
 
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
 # list off the diferent combos
-combos=[1, 2, 3, 4]
+menu = [1, 2, 3, 4]
 
 # customers' page
 @app.route('/', methods=['GET', 'POST'])
@@ -29,14 +34,15 @@ def index():
         if request.form.get('name') == '':
             flash('Please input your name')
             return redirect(url_for('index'))
-        elif not int(request.form.get('combo')) in combos:
+        elif not int(request.form.get('combo')) in menu:
             flash('Combo not available')
             return redirect(url_for('index'))
         
         # retrieve form values
         name = request.form.get('name')
         email = request.form.get('email')
-        combo = request.form.get('combo')
+        combos = request.form.get('combo')
+        combo = ', '.join(combos)
         table = 'Table: ' + request.form.get('table')
         address = 'Address: ' + request.form.get('address')
         radios = request.form.getlist('location')
@@ -63,7 +69,7 @@ def index():
     
     else:
         # render the order form with the aforementioned combos
-        return render_template('index.html', combos=combos)
+        return render_template('index.html', combos=menu)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -83,6 +89,7 @@ def login():
             flash('Unable to login')
             return render_template('login.html')
 
+        session['username'] = input_p
         return redirect(url_for('control'), code=308)
     else:
         # show login form
@@ -110,20 +117,22 @@ def control():
         if request.form.get('delete') == 'delete':
             order_id = int(request.form.get('counter'))
             db.execute('DELETE FROM orders WHERE id = ?', order_id)
+        return redirect(url_for('control'), code=303)
 
-        orders = db.execute('SELECT * FROM orders WHERE done = 0')
-        return render_template ('control.html', orders=orders)
-          
     else:
+        if not session.get('username'):
             flash('Login needed')
             return redirect(url_for('login'))
+        else:
+            orders = db.execute('SELECT * FROM orders WHERE done = 0')
+            return render_template ('control.html', orders=orders)
        
             
 
 @app.route('/log', methods=['GET', 'POST'])
 def log():
     if request.method == 'POST':
-        orders = db.execute('SELECT * FROM orders')
+        orders = db.execute('SELECT * FROM orders WHERE done = 1')
         return render_template ('log.html', orders=orders)
     else:
         flash('Login needed')

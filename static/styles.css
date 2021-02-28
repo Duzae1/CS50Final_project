@@ -19,3 +19,7 @@ body {
     position: absolute;
     right: 50px;
 }
+
+.buttons {
+    margin: 5px;
+}
