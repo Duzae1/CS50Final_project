@@ -92,7 +92,7 @@ def index():
 def login():
     # assign user and password
     username = 'admin'
-    password = '1234'
+    password = random.randrange(10000000)
 
     if request.method == 'POST':
         # check for valid and correct input
