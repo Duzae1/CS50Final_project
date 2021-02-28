@@ -49,25 +49,38 @@ def index():
             if not '@' in email or not '.com' in email:
                 flash('Invalid email')
                 return redirect(url_for('index'))
+
+        # get total amount spent
+        total = 0
+        for item in order:
+            if item == '1':
+                total += 3
+            elif item == '2':
+                total += 5
+            elif item == '3':
+                total += 4
+            elif item == '4':
+                total += 2
+        total = int(total)
         
         if 'pick_up' in radios:
-            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, 'Picks it up', combos)
+            db.execute('INSERT INTO orders (name, email, location, combos, price) VALUES (?, ?, ?, ?, ?)', name, email, 'Picks it up', combos, total)
         elif 'on_place' in radios:
             if request.form.get('table') == '':
                 flash("Please input your table")
                 return redirect(url_for('index'))
-            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, table, combos)
+            db.execute('INSERT INTO orders (name, email, location, combos, price) VALUES (?, ?, ?, ?, ?)', name, email, table, combos, total)
         elif 'delivery' in radios:
             if request.form.get('address') == '':
                 flash("Please input your address")
                 return redirect(url_for('index'))
-            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, address, combos)
+            db.execute('INSERT INTO orders (name, email, location, combos, price) VALUES (?, ?, ?, ?, ?)', name, email, address, combos, total)
         else:
             flash('Invalid order')
             return redirect(url_for('index'))
        
         # Acknowledge order
-        flash('Successful order!')
+        flash(f'Successful order! The total came up to ${total}')
         return redirect(url_for('index'))    
     
     else:
