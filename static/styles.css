@@ -1,5 +1,6 @@
 body {
     margin: 30px;
+    background-color: royalblue;
 }
 
 .hidden {
@@ -22,4 +23,14 @@ body {
 
 .buttons {
     margin: 5px;
+}
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+  }
+
+#carousel {
+    position: absolute;
+    right: 0;
+    top: 0;
 }

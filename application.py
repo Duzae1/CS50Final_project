@@ -29,31 +29,34 @@ def index():
         if request.form.get('name') == '':
             flash('Please input your name')
             return redirect(url_for('index'))
-        elif not int(request.form.get('combo')) in menu:
-            flash('Combo not available')
+        if not request.form.get('combo'):
+            flash('Please make an order')
             return redirect(url_for('index'))
+        for each in request.form.getlist('combo'):
+            if not int(each) in menu:
+                flash('Combo not available')
         
         # retrieve form values
         name = request.form.get('name')
         email = request.form.get('email')
-        combos = request.form.get('combo')
-        combo = ', '.join(combos)
+        order = request.form.getlist('combo')
+        combos = ', '.join(order)
         table = 'Table: ' + request.form.get('table')
         address = 'Address: ' + request.form.get('address')
         radios = request.form.getlist('location')
         
         if 'pick_up' in radios:
-            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, 'Picks it up', combo)
+            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, 'Picks it up', combos)
         elif 'on_place' in radios:
             if request.form.get('table') == '':
                 flash("Please input your table")
                 return redirect(url_for('index'))
-            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, table, combo)
+            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, table, combos)
         elif 'delivery' in radios:
             if request.form.get('address') == '':
                 flash("Please input your address")
                 return redirect(url_for('index'))
-            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, address, combo)
+            db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, address, combos)
         else:
             flash('Invalid order')
             return redirect(url_for('index'))
