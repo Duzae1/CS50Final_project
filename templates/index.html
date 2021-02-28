@@ -3,57 +3,74 @@
 {% block title %}SelfServe{% endblock %}
 
 {% block body %}
-        <form action='/index' method='post'>
-                <input name='name' autocomplete='off' placeholder='Your name' type='text' autofocus><br>
-                <input id='email' name='email' autocomplete='off' placeholder='Your email (Optional)' type='text'><br>
-                <div>
-                        <input class='radio_items' name='location' type='radio' value='pick_up' onclick="change_input(event);"><label for='delivery'>Pick up</label>
-                        <input class='radio_items' name='location' type='radio' value='on_place' onclick="change_input(event);"><label for='delivery'>Eat here</label>
-                        <input class='radio_items' name='location' type='radio' value='delivery' onclick="change_input(event);"><label for='delivery'>Delivery</label>
-                </div>
-                <div>   
-                        <input id='address' class='hidden' name='address' autocomplete='off' placeholder='Your address' type='text'>
-                        <input id='table' class='hidden' name='table' autocomplete='off' placeholder='Table number' type='number' max='10'>
-                </div>
-                <div id='order_div'>
-                        {% for combo in menu %}
-                                <input hidden name='menu' value='{{ combo }}'>
-                        {% endfor %}
-                </div>
-                <div>
-                        <button name='add' class='buttons' type='button' onclick='add_combo()'>Add Combo</button> 
-                </div>
-                <button class='buttons' type='submit'>Submit order</button>
-        </form>
+<h1 class='container-fluid'>SelfServe</h1>
+<form class='form container-fluid' id='form' action='/index' method='post'>
+        <input name='name' autocomplete='off' placeholder='Your name' type='text' autofocus><br>
+        <input id='email' name='email' autocomplete='off' placeholder='Your email (Optional)' type='text'><br>
+        <div>
+                <input class='radio_items' name='location' type='radio' value='pick_up' onclick="change_input(event);"><label for='delivery'>Pick up</label>
+                <input class='radio_items' name='location' type='radio' value='on_place' onclick="change_input(event);"><label for='delivery'>Eat here</label>
+                <input class='radio_items' name='location' type='radio' value='delivery' onclick="change_input(event);"><label for='delivery'>Delivery</label>
+        </div>
+        <div>   
+                <input id='address' class='hidden' name='address' autocomplete='off' placeholder='Your address' type='text'>
+                <input id='table' class='hidden' name='table' autocomplete='off' placeholder='Table number' type='number' max='10'>
+        </div>
+        <div id='order_div'>
+                {% for combo in menu %}
+                        <input hidden name='menu' value='{{ combo }}'>
+                {% endfor %}
+        </div>
+        <div>
+                <button name='add' class='buttons' type='button' onclick='add_combo()'>Add Combo</button> 
+        </div>
+        <button class='buttons' type='submit'>Submit order</button>
+</form>
 
-        <div id="carousel" class="carousel slide carousel-dark w-50" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                </div>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="/static/combo_1.jpg" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>COMBO 1</h5>
-                      <p>Burger + Fries</p>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <img src="/static/combo_2.jpg" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>COMBO 2</h5>
-                      <p>Chicken sandwich</p>
-                    </div>
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carousel"  data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carousel"  data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
+<div id="carousel" class="carousel slide carousel-dark w-100" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/static/pic1.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+        <h5>COMBO 1</h5>
+        <p>BBQ Skewer</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/static/pic2.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+        <h5>COMBO 2</h5>
+        <p>Grilled Chicken with Veggies</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/static/pic3.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+        <h5>COMBO 3</h5>
+        <p>Wok Veggie Salad</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/static/pic4.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+        <h5>COMBO 4</h5>
+        <p>Vegan Toast</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel"  data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel"  data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 {% endblock %}

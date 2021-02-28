@@ -44,6 +44,11 @@ def index():
         table = 'Table: ' + request.form.get('table')
         address = 'Address: ' + request.form.get('address')
         radios = request.form.getlist('location')
+
+        if not email == '' and not email == None:
+            if not '@' in email or not '.com' in email:
+                flash('Invalid email')
+                return redirect(url_for('index'))
         
         if 'pick_up' in radios:
             db.execute('INSERT INTO orders (name, email, location, combos) VALUES (?, ?, ?, ?)', name, email, 'Picks it up', combos)
@@ -81,8 +86,6 @@ def login():
         input_u = request.form.get("username")
         input_p = request.form.get("password")
 
-        print(f'{input_u}, {input_p}')
-
         if input_u != username or input_p != password:
             flash('Unable to login')
             return render_template('login.html')
@@ -103,7 +106,7 @@ def control():
             name = user_data[0]['name']
             email = user_data[0]['email']
             where = user_data[0]['location']
-            if not email == None:
+            if not email == '':
                 if 'Address' in where: 
                     message = Message(f"Your order is on the way {name}!", recipients=[email])
                     mail.send(message)
