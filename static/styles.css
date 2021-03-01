@@ -14,8 +14,7 @@ h1 {
     margin-right: auto;
 }
 
-.radio_items {
-    margin-right: 5px;
+.radio_label {
     margin-left: 10px;
 }
 
@@ -24,7 +23,8 @@ h1 {
 }
 
 .buttons {
-    margin: 5px;
+    margin: 10px;
+    margin-bottom: 0px;
 }
 
 .carousel-inner > .item > img {

@@ -26,8 +26,8 @@
                     <td>${{ order.price }}</td>
                     <td>{{ order.time }}</td>
                     <form action='/control' method='post'>
-                        <td><button name='save' value='save' type='submit'>&#x2705</button></td>
-                        <td><button name='delete' value='delete' type='submit'>&#10060</button></td>
+                        <td><button class='btn btn-outline-primary' name='save' value='save' type='submit'>&#x2705</button></td>
+                        <td><button class='btn btn-outline-primary' name='delete' value='delete' type='submit'>&#10060</button></td>
                         <input type='hidden' name='counter' value='{{ order.id }}'>
                     </form>
                 </tr>

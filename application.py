@@ -1,7 +1,9 @@
 import random
+import os
 
 from flask import Flask, flash, redirect, render_template, request, url_for, session
 from flask_mail import Mail, Message
+from flask_session import Session
 from cs50 import SQL
 
 # setup flask app and database
@@ -16,6 +18,10 @@ app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USERNAME"] = 'selfservebot@gmail.com'
 mail = Mail(app)
+
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 # list off the diferent combos
 menu = [1, 2, 3, 4]
@@ -92,7 +98,7 @@ def index():
 def login():
     # assign user and password
     username = 'admin'
-    password = random.randrange(10000000)
+    password = os.getenv('SELFSERVE')
 
     if request.method == 'POST':
         # check for valid and correct input
@@ -103,7 +109,7 @@ def login():
             flash('Unable to login')
             return render_template('login.html')
 
-        session['username'] = input_p
+        session['username'] = username
         return redirect(url_for('control'), code=308)
     else:
         # show login form

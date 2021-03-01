@@ -6,12 +6,12 @@
 Stock images from https://www.pexels.com
 <h1 class='container-fluid'>SelfServe</h1>
 <form class='form container-fluid' id='form' action='/index' method='post'>
-        <input name='name' autocomplete='off' placeholder='Your name' type='text' autofocus><br>
-        <input id='email' name='email' autocomplete='off' placeholder='Your email (Optional)' type='text'><br>
+        <input class='buttons' name='name' autocomplete='off' placeholder='Your name' type='text' autofocus><br>
+        <input class='buttons' id='email' name='email' autocomplete='off' placeholder='Your email (Optional)' type='text'><br>
         <div>
-                <input class='radio_items' name='location' type='radio' value='pick_up' onclick="change_input(event);"><label for='delivery'>Pick up</label>
-                <input class='radio_items' name='location' type='radio' value='on_place' onclick="change_input(event);"><label for='delivery'>Eat here</label>
-                <input class='radio_items' name='location' type='radio' value='delivery' onclick="change_input(event);"><label for='delivery'>Delivery</label>
+                <input class='radio_label form-check-input' name='location' type='radio' value='pick_up' onclick="change_input(event);"><label for='delivery' class="form-check-label radio_label">Pick up</label>
+                <input class='radio_label form-check-input' name='location' type='radio' value='on_place' onclick="change_input(event);"><label for='delivery' class="form-check-label radio_label">Eat here</label>
+                <input class='radio_label form-check-input' name='location' type='radio' value='delivery' onclick="change_input(event);"><label for='delivery' class="form-check-label radio_label">Delivery</label>
         </div>
         <div>   
                 <input id='address' class='hidden' name='address' autocomplete='off' placeholder='Your address' type='text'>
@@ -23,9 +23,9 @@ Stock images from https://www.pexels.com
                 {% endfor %}
         </div>
         <div>
-                <button name='add' class='buttons' type='button' onclick='add_combo()'>Add Combo</button> 
+                <button name='add' class='buttons btn btn-outline-light' type='button' onclick='add_combo()'>Add Combo</button> 
         </div>
-        <button class='buttons' type='submit'>Submit order</button>
+        <button class='buttons btn btn-outline-light' type='submit'>Submit order</button>
 </form>
 
 <div id="carousel" class="carousel slide carousel-dark w-100" data-bs-ride="carousel">

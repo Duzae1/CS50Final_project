@@ -38,6 +38,7 @@ function add_combo() {
     remove = document.createElement('button');
     remove.setAttribute('type', 'button');
     remove.setAttribute('onclick', 'remove_combo(event)');
+    remove.className = 'btn btn-outline-light'
     remove.innerHTML = '&#10060';
     order_div.appendChild(remove);
 
