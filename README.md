@@ -1,5 +1,5 @@
 # SelfServe: A web based delivery service
-#### Video Demo:  <URL HERE>
+#### Video Demo:  https://youtu.be/_w95s6M5Svw
 #### Description:
   SelfServe is a web application which enables easy interactions between a restaurant and its customers. The app is written in Python, using Flask as a framework. My objective was to make an app which allowed for an easy set up, letting new businesses have the nuance of an internet page and a database without the need for a personalized program.
   Inside the templates folder reside the htmls for the project:

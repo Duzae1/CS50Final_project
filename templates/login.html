@@ -3,9 +3,9 @@
 {% block title %}SelfServeAdmin{% endblock %}
 
 {% block body %}
-        <form action="/login" method="post">
+        <form action="/login" method="post" style='margin: 40px;'>
                 <input autocomplete="off" name="username" placeholder="Username" type="text">
                 <input autocomplete="off" name="password" placeholder="Password" type="password">
-                <button type="submit">Submit</button>
+                <button class='btn btn-outline-light' type="submit">Submit</button>
         </form>
 {% endblock %}
