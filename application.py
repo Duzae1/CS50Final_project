@@ -152,8 +152,11 @@ def control():
 @app.route('/log', methods=['GET', 'POST'])
 def log():
     if request.method == 'POST':
-        orders = db.execute('SELECT * FROM orders WHERE done = 1')
-        return render_template ('log.html', orders=orders)
+        return redirect(url_for('log'), code=303)
     else:
-        flash('Login needed')
-        return redirect(url_for('login'))
+        if not session.get('username'):
+            flash('Login needed')
+            return redirect(url_for('login'))
+        else:
+            orders = db.execute('SELECT * FROM orders WHERE done = 1')
+            return render_template ('log.html', orders=orders)
